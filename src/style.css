@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microquake";
+    font-size: 2rem;
+    @apply bg-slate-950 text-white;
+}
+
+section {
+    @apply w-full;
+}
+
+/* I have ttf files on ./assets/unique/Unique.ttf file. how to load them to be used in elements? */
+
+@font-face {
+    font-family: "UniqueFont";
+    src: url("../assets/unique/Unique.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+/* assets/dubiel/DubielPlain.ttf */
+@font-face {
+    font-family: "Dubiel";
+    src: url("../assets/dubiel/DubielPlain.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Dubiel";
+    src: url("../assets/dubiel/DubielItalic.ttf");
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Microquake";
+    src: url("../assets/microquake/Microquake.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1 {
+    font-family: "UniqueFont", sans-serif;
+}
+
+.button {
+    @apply bg-none border-white font-bold border px-5 py-2 cursor-pointer rounded-lg hover:bg-white hover:text-slate-950 transition duration-300;
+}
+
+section {
+    min-height: 100vh;
+}
+
+.chips {
+    @apply relative;
+}
+
+.chip {
+    @apply rounded-full border border-white px-3 py-1 flex flex-row text-base text-nowrap;
+}
+
+@keyframes right-to-left {
+    0% {
+        transform: translateX(100vw);
+    }
+    100% {
+        transform-origin: center right;
+        transform: translateX(-100vw);
+    }
+}
+
+.chip span:nth-child(1) {
+    @apply border-r-white border-r mr-3 pr-3;
+}
+
+.transparent-text {
+    color: transparent; /* Make the fill color transparent */
+    -webkit-text-stroke: 2px #f2f4f799; /* Stroke width and color */
+    text-stroke: 1px #f2f4f799; /* For browsers that support the standard property */
+}
+
+/* canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+} */
