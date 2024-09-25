@@ -24,7 +24,6 @@ camera.position.z = 13;
 const scene = new THREE.Scene();
 let headphone: THREE.Object3D | null = null;
 let pivot: THREE.Object3D = new THREE.Object3D();
-let center: THREE.Vector3 | null;
 let pos = {
     hero: {
         translate: {
@@ -202,10 +201,6 @@ loader.load(
             ease: "power1.inOut",
         });
 
-        // Calculate the bounding box of the model
-        const box = new THREE.Box3().setFromObject(headphone);
-        center = box.getCenter(new THREE.Vector3());
-
         // Reposition the model so that its center is at the origin
         // headphone.position.x -= center.x - 1;
         // headphone.position.y -= center.y;
@@ -242,8 +237,6 @@ loader.load(
 
         // Add the pivot to the scene
         scene.add(pivot);
-
-        console.log("added");
     },
     undefined,
     (error: any) => {
