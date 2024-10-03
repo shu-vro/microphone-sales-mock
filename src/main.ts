@@ -218,12 +218,12 @@ loader.load(
 
         const cubeTextureLoader = new THREE.CubeTextureLoader();
         const environmentMap = cubeTextureLoader.load([
-            "../assets/Bridge2/posx.jpg",
-            "../assets/Bridge2/negx.jpg",
-            "../assets/Bridge2/posy.jpg",
-            "../assets/Bridge2/negy.jpg",
-            "../assets/Bridge2/posz.jpg",
-            "../assets/Bridge2/negz.jpg",
+            `${baseUrl}assets/Bridge2/posx.jpg`,
+            `${baseUrl}assets/Bridge2/negx.jpg`,
+            `${baseUrl}assets/Bridge2/posy.jpg`,
+            `${baseUrl}assets/Bridge2/negy.jpg`,
+            `${baseUrl}assets/Bridge2/posz.jpg`,
+            `${baseUrl}assets/Bridge2/negz.jpg`,
         ]);
 
         // Apply the environment map to the material
