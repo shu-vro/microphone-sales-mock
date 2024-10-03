@@ -184,8 +184,11 @@ let pos = {
 };
 
 const loader = new GLTFLoader();
+
+const baseUrl = import.meta.env.BASE_URL;
 loader.load(
-    "../assets/headphones_hp.glb",
+    // "../assets/headphones_hp.glb",
+    `${baseUrl}assets/headphones_hp.glb`,
     (gltf: any) => {
         headphone = gltf.scene as THREE.Object3D;
         // pos.hero.scale get the values of the object
