@@ -87,6 +87,30 @@ section {
     text-stroke: 1px #f2f4f799; /* For browsers that support the standard property */
 }
 
+.feature-header {
+    @apply text-[4rem] lg:text-[7rem] md:text-[5rem] break-words;
+}
+
+.feature-text {
+    @apply text-xl md:text-[3rem];
+}
+
+.feature-section {
+    @apply flex flex-wrap items-center justify-center max-sm:!flex-col;
+}
+
+.feature-section > .flex-grow {
+    @apply max-sm:h-[90vh] max-sm:w-full;
+}
+
+.feature-section > div:nth-child(2) {
+    @apply max-sm:w-full;
+}
+
+.reversed {
+    @apply flex-row-reverse;
+}
+
 /* canvas {
     position: fixed;
     top: 0;

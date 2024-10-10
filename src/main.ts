@@ -315,45 +315,86 @@ window.onresize = () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
 };
 
-window.onscroll = () => {
-    let selected: keyof typeof pos | undefined;
-    document.querySelectorAll("section").forEach((el) => {
-        const box = el.getBoundingClientRect();
+if (!window.IntersectionObserver) {
+    console.log("Intersection Observer not supported");
+    window.onscroll = () => {
+        let selected: keyof typeof pos | undefined;
+        document.querySelectorAll("section").forEach((el) => {
+            const box = el.getBoundingClientRect();
 
-        // if (box.top < window.innerHeight / 3 && box.top > 0) {
-        //     selected = el.id as keyof typeof pos;
-        // }
-        if (box.top - box.height + window.innerHeight / 3 < 0) {
-            selected = el.id as keyof typeof pos;
-        }
-    });
+            if (box.top - box.height + window.innerHeight / 3 < 0) {
+                selected = el.id as keyof typeof pos;
+            }
 
-    if (!selected) return;
+            if (el.id === "hero") {
+                console.log(box.top, box.height, window.innerHeight);
+            }
+        });
 
-    let selectedPos = pos[selected];
-    // console.log(selectedPos);
+        if (!selected) return;
 
-    if (!selectedPos || !headphone) return;
+        let selectedPos = pos[selected];
+        console.log(selected);
 
-    gsap.to(headphone!.rotation, {
-        duration: 1,
-        ease: "power1.inOut",
-        ...selectedPos["rotate"],
-        // position: selectedPos["translate"],
-        // scale: selectedPos["scale"],
-    });
-    gsap.to(headphone!.position, {
-        duration: 1,
-        ease: "power1.inOut",
-        ...selectedPos["translate"],
-        // position: selectedPos["translate"],
-        // scale: selectedPos["scale"],
-    });
-    gsap.to(headphone!.scale, {
-        duration: 1,
-        ease: "power1.inOut",
-        ...selectedPos["scale"],
-        // position: selectedPos["translate"],
-        // scale: selectedPos["scale"],
-    });
-};
+        if (!selectedPos || !headphone) return;
+
+        gsap.to(headphone!.rotation, {
+            duration: 1,
+            ease: "power1.inOut",
+            ...selectedPos["rotate"],
+            // position: selectedPos["translate"],
+            // scale: selectedPos["scale"],
+        });
+        gsap.to(headphone!.position, {
+            duration: 1,
+            ease: "power1.inOut",
+            ...selectedPos["translate"],
+            // position: selectedPos["translate"],
+            // scale: selectedPos["scale"],
+        });
+        gsap.to(headphone!.scale, {
+            duration: 1,
+            ease: "power1.inOut",
+            ...selectedPos["scale"],
+            // position: selectedPos["translate"],
+            // scale: selectedPos["scale"],
+        });
+    };
+}
+
+const observer = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const selected = entry.target.id as keyof typeof pos;
+                const selectedPos = pos[selected];
+
+                if (selectedPos && headphone) {
+                    gsap.to(headphone!.rotation, {
+                        duration: 1,
+                        ease: "power1.inOut",
+                        ...selectedPos["rotate"],
+                    });
+                    gsap.to(headphone!.position, {
+                        duration: 1,
+                        ease: "power1.inOut",
+                        ...selectedPos["translate"],
+                    });
+                    gsap.to(headphone!.scale, {
+                        duration: 1,
+                        ease: "power1.inOut",
+                        ...selectedPos["scale"],
+                    });
+                }
+            }
+        });
+    },
+    {
+        threshold: 0.5, // Adjust this value as needed
+    }
+);
+
+// Observe all sections
+document.querySelectorAll("section").forEach((el) => {
+    observer.observe(el);
+});
